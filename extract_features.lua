@@ -42,7 +42,8 @@ local function run_image(model, img_path, opt, dtype)  -- dtype指明image tenso
   img_caffe:add(-1, vgg_mean) -- 图片数据均值归一；
 
   -- 真正的extractFeatures功能在model中；输入处理好的image，抽取出xcycwh坐标?；feats?
-  local boxes_xcycwh, feats = model:extractFeatures(img_caffe:type(dtype))  -- 重心部分；image:type应该就是tensor的type，返回的是type名.
+  -- [重心] image:type应该就是tensor的type，返回的是type名.
+  local boxes_xcycwh, feats = model:extractFeatures(img_caffe:type(dtype))
   local boxes_xywh = box_utils.xcycwh_to_xywh(boxes_xcycwh) -- 产生boxes的xywh坐标.
   return boxes_xywh, feats
 end
