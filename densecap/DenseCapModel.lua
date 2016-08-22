@@ -16,8 +16,9 @@ local utils = require 'densecap.utils'
 
 local DenseCapModel, parent = torch.class('DenseCapModel', 'nn.Module')
 
-
-function DenseCapModel:__init(opt)
+-- DenseCapModel被看做类；类中函数用:方式定义；
+-- 不同于extract_features.lua中的local函数，其只是lua的一般module中的local函数.
+function DenseCapModel:__init(opt)   -- ? lua中的__init()函数的规则是什么?
   local net_utils = require 'densecap.net_utils'
   opt = opt or {}  
   opt.cnn_name = utils.getopt(opt, 'cnn_name', 'vgg-16')
@@ -192,11 +193,11 @@ end
 
 
 --[[
-Convert this DenseCapModel to a particular datatype, and convert convolutions
-between cudnn and nn.
+Convert this DenseCapModel to a particular datatype, and convert convolutions between cudnn and nn.
+
 --]]
 function DenseCapModel:convert(dtype, use_cudnn)
-  self:type(dtype)
+  self:type(dtype)  -- 这里的type()是NN包Module类的函数；是将一个module中的所有参数的类型转换成dtype；不同于Tensor类中的type().
   if cudnn and use_cudnn ~= nil then
     local backend = nn
     if use_cudnn then

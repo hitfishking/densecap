@@ -1,11 +1,11 @@
+-- ultil.lua是一个lua module； module是lua/torch项目的组织手段.
 local cjson = require 'cjson'
 
 local utils = {}
 
 
 --[[
-Utility function to set up GPU imports and pick datatype based on commmand line
-arguments.
+Utility function to set up GPU imports and pick datatype based on commmand line arguments.
 
 Inputs:
 - gpu: Index of GPU requested on the command line; zero-indexed. gpu < 0 means
@@ -23,10 +23,10 @@ function utils.setup_gpus(gpu, use_cudnn)
   local dtype = 'torch.FloatTensor'
   local actual_use_cudnn = false
   if gpu >= 0 then
-    require 'cutorch'
+    require 'cutorch'   -- require的本质是调用一个匿名函数，其可在任意位置调用.
     require 'cunn'
     cutorch.setDevice(gpu + 1)
-    dtype = 'torch.CudaTensor'
+    dtype = 'torch.CudaTensor'  -- CudaTensor应该是cutorch中引入的新类型；以适应CUDA运行的需要.
     if use_cudnn == 1 then
       require 'cudnn'
       actual_use_cudnn = true
