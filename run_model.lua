@@ -7,8 +7,6 @@ local utils = require 'densecap.utils'
 local box_utils = require 'densecap.box_utils'
 local vis_utils = require 'densecap.vis_utils'
 
--- comment line11...
-
 --[[
 Run a trained DenseCap model on images.
 

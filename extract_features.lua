@@ -1,7 +1,7 @@
 require 'torch'
 require 'nn'
 require 'image'
-require 'hdf5'
+require 'hdf5'  -- 安装失败，尝试unbuntu server 64bit
 
 require 'densecap.DenseCapModel'
 local utils = require 'densecap.utils'
